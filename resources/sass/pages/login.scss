@@ -1,0 +1,32 @@
+@import "../app";
+
+.login {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+  }
+  form {
+    width: 100%;
+    .form-group {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      .input-group {
+        max-width: 400px;
+      }
+    }
+    .action-submit {
+      width: 100%;
+      max-width: 400px;
+      text-align: right;
+    }
+  }
+}
