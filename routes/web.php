@@ -19,5 +19,5 @@ Auth::routes();
 
 
 
-Route::get('/s', 'Index\IndexController@index')->name('index');
+Route::get('/', 'Index\IndexController@index')->name('index');
 
