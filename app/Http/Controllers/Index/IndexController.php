@@ -14,8 +14,12 @@ class IndexController extends Controller
         $this->middleware('auth');
 
         if (Auth::check()) {
-
-            return view('index.index');
+            $returns = [
+                'title' => 'CDA',
+                'js' => 'index',
+                'css' => 'index'
+            ];
+            return view('index.index', $returns);
 
         } else {
             $returns = [

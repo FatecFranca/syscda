@@ -1,14 +1,79 @@
-
-// Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+@import "./components/navbar";
+@import "./components/sidebar";
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.sticky-header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0px;
+  background-color: #f5f8fa;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 100
+}
+
+.container-fluid .row{
+  display: flex;
+  flex-flow: row;
+}
+
+.container-fluid .row .mainContent{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  width: 100%;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.form-padding-bottom {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.address-edit {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kinship-edit {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.rd-block {
+  margin: 5px 5px 5px 0;
+  width: 15px;
+  display: inline-block;
+}
+
+.txt-no-resize {
+  resize: none;
+}
+
+.group-line {
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  padding: 15px 0;
+  margin-top: 25px;
+}
+
+.group-line-bottom {
+  border-bottom: 1px solid #dee2e6;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+.el-hide {
+  display: none !important;
 }

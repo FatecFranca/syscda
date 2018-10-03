@@ -1,0 +1,100 @@
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  width: auto;
+  height: 100%;
+  display: block;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  height: 100vh;
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: scroll; /* Scrollable contents if viewport is shorter than content. */
+  display: flex;
+  width: 200px;
+}
+
+.sidebar-sticky #toggle-menu {
+  position: absolute;
+  display: flex;
+  align-self: center;
+  margin-left: 90%;
+  font-size: 20px;
+}
+
+.sidebar-sticky #toggle-menu span {
+  display: none;
+  cursor: pointer;
+}
+
+.sidebar-sticky .nav{
+  display: block;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+/* hide scrolbar */
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-link .label{
+  padding-left: 10px;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #ffc107;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+.submenu-items {
+  text-indent: 15px;
+}
+
+/*
+ * Utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+@media (max-width: 768px) {
+  .sidebar{
+    display: none;
+  }
+}

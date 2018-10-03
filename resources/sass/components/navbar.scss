@@ -1,0 +1,51 @@
+/*
+ * Navbar
+ */
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  color: white;
+}
+
+.navbar .menu-hamburger{
+  display: none;
+  color: white;
+  font-size: 25px;
+}
+
+.navbar > div{
+  display: flex;
+  align-items: center;
+}
+
+.navbar .navbar-nav .dropdown .dropdown-menu{
+  position: absolute;
+  margin-left: -80px;
+}
+
+
+@media (max-width: 768px) {
+  .navbar .navbar-brand{
+    display: none;
+  }
+
+  .navbar .menu-hamburger{
+    display: block;
+  }
+
+  // .dropdown-toggle::after {
+  //     margin-left: 0em;
+  // }
+}
+
+
+@media (max-width: 400px) {
+  .navbar > div{
+    width: 80%;
+  }
+
+  .navbar .navbar-nav{
+    text-align: center;
+  }
+}

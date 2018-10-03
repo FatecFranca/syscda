@@ -1,23 +1,26 @@
-Bem vindo(a) ao CDA!
+# Bem vindo(a) ao CDA!
 
-Para ter um ambiente de desenvolvimento requer os seguintes programas para Windows
-- PHP 7.2 => Sugiro usar o XAMPP
-- Composer => Ferramente de linnha de comando
-- Laravel => Precisa do composer
-- MySql
-- Node
+Para ter um ambiente de desenvolvimento requer os seguintes programas para Windows </br>
+- PHP 7.2 => Sugiro usar o XAMPP </br>
+- Composer => Ferramente de linnha de comando </br>
+- Laravel => Precisa do composer </br>
+- MySql </br>
+- Node </br>
 
+</br>
 Em demais sistemas operacionais vai precisar dessas ferramentas bases,
 seja eles varias distros do Linux ou MacOS, na coloquei aqui porque não
 sei configurar corretamente. Mas sinta-se a vontade de contribuir. :)
 
-Para instalar clone o projeto em seu ambiente de desenvolvimento.
+</br>
 
-Rode os comandos de npm install e composer install.
+### Para instalar clone o projeto em seu ambiente de desenvolvimento.
 
-Gere e configure o .env a partir do .env.example.
-No .env coloque as informações do banco de dados.
+Rode os comandos de npm install e composer install. </br>
 
-Gere a key do Laravel através do comando php artisan key:generate
+Gere e configure o .env a partir do .env.example. </br>
+No .env coloque as informações do banco de dados. </br>
 
-Execute npm run dev.
+Gere a key do Laravel através do comando php artisan key:generate </br>
+
+Execute npm run dev. </br>
