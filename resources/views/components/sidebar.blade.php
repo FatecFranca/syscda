@@ -5,12 +5,7 @@
             <span class="fa fa-angle-right"></span>
         </div>
         <ul class="nav flex-column">
-            @include('components.sidebar-items.products')
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <span class="fas fa-shopping-cart"></span> <span class="label">Produtos</span>
-                </a>
-            </li>
+            @include('components.sidebar-items.rgi')
         </ul>
     </div>
 </nav>
