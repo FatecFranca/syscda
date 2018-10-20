@@ -19,7 +19,7 @@ class IndexController extends Controller
                 'js' => 'index',
                 'css' => 'index'
             ];
-            return view('index.index', $returns);
+            return view('pages.index.index', $returns);
 
         } else {
             $returns = [
