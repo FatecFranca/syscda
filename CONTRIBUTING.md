@@ -1,6 +1,6 @@
 # Padrões para contribuir com o Projeto
 
-## Primeiro crie `issue` Envie relatórios de bugs ou solicitações de recursos 
+## Primeiro crie `issue` Envie relatórios de bugs ou Novo Requisito
 
 Por favor, discuta as mudanças com antecedência para garantir que elas serão mescladas.
 
