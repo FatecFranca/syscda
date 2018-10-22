@@ -20,7 +20,7 @@ class CreateTableAddress extends Migration
             $table->text('complement')->nullable();
             $table->string('city', 200);
             $table->char('uf', 2);
-            $table->string('cep', 9);
+            $table->string('zipcode', 9);
             $table->timestamps();
             $table->softDeletes();
         });

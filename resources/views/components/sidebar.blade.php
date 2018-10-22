@@ -5,7 +5,7 @@
             <span class="fa fa-angle-right"></span>
         </div>
         <ul class="nav flex-column">
-            @include('components.sidebar-items.rgi')
+            @include('components.sidebar-items.addresses')
         </ul>
     </div>
 </nav>

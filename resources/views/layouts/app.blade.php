@@ -41,5 +41,6 @@
             </main>
         </div>
     </div>
+    @include('components.modal')
 </body>
 </html>

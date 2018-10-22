@@ -3,6 +3,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./components/navbar";
 @import "./components/sidebar";
+@import '~select2/dist/css/select2.css';
 
 .navbar-laravel {
   background-color: #fff;
@@ -72,6 +73,21 @@
   border-bottom: 1px solid #dee2e6;
   padding: 15px 0;
   margin-bottom: 15px;
+}
+
+.select2 {
+  width: 100% !important;
+}
+.select2-selection {
+  height: 37px !important;
+  display: flex !important;
+  border-color: #ced4da !important;
+}
+.select2-selection__rendered {
+  align-self: center !important;
+}
+.select2-selection__arrow {
+  height: 37px !important;
 }
 
 .el-hide {

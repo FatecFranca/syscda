@@ -13,7 +13,7 @@ Para ter um ambiente de desenvolvimento requer os seguintes programas para Windo
 - Node
 
 Em demais sistemas operacionais vai precisar dessas ferramentas bases,
-seja eles varias distros do Linux ou MacOS, na coloquei aqui porque não
+seja eles varias distros do Linux ou MacOS, na coloquei aqui porque nï¿½o
 sei configurar corretamente. Mas sinta-se a vontade para contribuir.  :)
 
 
@@ -23,10 +23,14 @@ Rode os comandos de npm install e composer install.
 
 Gere e configure o .env a partir do .env.example.
 
-No .env coloque as informações do banco de dados.
+No .env coloque as informaï¿½ï¿½es do banco de dados.
 
-Gere a key do Laravel através do comando php artisan key:generate
+Gere a key do Laravel atravï¿½s do comando php artisan key:generate
 
 Rode as migrations e as seeds
+
+php artisan migrate
+
+php artisan db:seed
 
 Execute npm run dev.

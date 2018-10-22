@@ -1,4 +1,6 @@
 require('./bootstrap');
+require('./components/modal');
+import 'select2';
 
 //lets sidebar
 const sidebar = document.getElementsByClassName('sidebar')[0];
@@ -112,3 +114,7 @@ $(document).on('click', '.menu-hamburger', function () {
         });
     }, false);
 })();
+
+$(document).ready(function() {
+    $('.custom-select').select2();
+});
