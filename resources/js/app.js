@@ -88,7 +88,7 @@ if (sidebar) {
 
 
 $(document).on('click', '.menu-hamburger', function () {
-    side = document.getElementsByClassName('sidebar')[0];
+    var side = document.getElementsByClassName('sidebar')[0];
     if (side.style.display === "") {
         side.style.display = "block";
     } else {
