@@ -9,7 +9,7 @@
                 <th scope="col">{{ __('default/views.id') }}</th>
                 <th scope="col">{{ __('rgi/views.rgi_short') }}</th>
                 <th scope="col">{{ __('rgi/views.house_number') }}</th>
-                <th scope="col">{{ __('addresses/views.zipcode') }}</th>
+                <th scope="col">{{ __('validation.attributes.zipcode') }}</th>
                 <th scope="col">{{ __('default/views.actions') }}</th>
             </tr>
             </thead>
