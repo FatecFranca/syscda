@@ -75,12 +75,13 @@ class RgiController extends Controller
     {
         $message = [
             'rgi_number.required' => "RGI é obrigatório.",
+            'rgi_number.unique' => 'RGI já existente.',
             'number.required' => "Número da casa é obrigatório.",
-            'address_id' => "Endereço é obrigatório"
+            'address_id.required' => "Endereço é obrigatório"
         ];
 
         $this->validate($request, [
-            'rgi_number' => 'required',
+            'rgi_number' => 'required|unique:rgi',
             'number' => 'required',
             'address_id' => 'required'
         ], $message);
@@ -114,6 +115,39 @@ class RgiController extends Controller
                 ]
             ];
             return view('pages.rgi.edit', $returns);
+        }
+
+        flashMessage($request, __('default/actions.not_found'), 'warning');
+        return redirect(route('rgi.index'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $message = [
+            'rgi_number.required' => "RGI é obrigatório.",
+            'rgi_number.unique' => 'RGI já existente.',
+            'number.required' => "Número da casa é obrigatório.",
+            'address_id.required' => "Endereço é obrigatório"
+        ];
+
+        $this->validate($request, [
+            'rgi_number' => 'required|unique:rgi,rgi_number,' . $id,
+            'number' => 'required',
+            'address_id' => 'required'
+        ], $message);
+
+        $data = $request->all();
+        $rgi = RGI::find($id);
+
+        if ($rgi) {
+            $result = $rgi->fill($data)->save();
+            if ($result) {
+                flashMessage($request, __('default/actions.updated_success'), 'success');
+                return redirect(route('rgi.show', $rgi->id));
+            } else {
+                Utils::flashMessage($request, __('default/actions.updated_danger'), 'danger');
+                return redirect(route('rgi.show', $rgi->id))->withInput();
+            }
         }
 
         flashMessage($request, __('default/actions.not_found'), 'warning');
