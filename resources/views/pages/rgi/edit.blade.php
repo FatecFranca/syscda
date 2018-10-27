@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <form class="form" method="POST" action="{{ route('rgi.store') }}">
+    <form class="form" method="POST" action="{{ route('rgi.update', ['id' => $rgi->id]) }}">
+        @method('PUT')
         @csrf
         @include('components.header')
         <div class="form-row">
