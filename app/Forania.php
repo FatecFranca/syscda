@@ -5,22 +5,21 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RGI extends Model
+class Forania extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'rgi';
+    protected $table = 'foranias';
 
     protected $fillable = [
-        'rgi_number', 'number',
-        'address_id', 'user_id'
+        'name', 'opening_date',
+        'name', 'user_id', 'diocese_id'
     ];
 
-
-    public function address()
+    public function diocese()
     {
-        return $this->belongsTo('App\Address');
+        return $this->belongsTo('App\Diocese');
     }
 }

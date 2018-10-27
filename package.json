@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "jquery-mask-plugin": "^1.14.15",
         "select2": "^4.0.6-rc.1"
     }
 }

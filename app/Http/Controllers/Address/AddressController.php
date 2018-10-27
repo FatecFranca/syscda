@@ -6,6 +6,7 @@ use App\Address;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
@@ -85,6 +86,7 @@ class AddressController extends Controller
         ], $message);
 
         $data = request()->except(['_token']);
+        $data['user_id'] = Auth::id();
         $address = Address::firstOrCreate($data);
 
         if ($address) {
@@ -92,7 +94,7 @@ class AddressController extends Controller
             return redirect(route('addresses.show', $address->id));
         }
 
-        flashMessage($request, __('default/actions.not_found'), 'warning');
+        flashMessage($request, __('default/actions.created_error'), 'warning');
         return redirect(route('addresses.index'));
     }
 
@@ -144,8 +146,8 @@ class AddressController extends Controller
                 flashMessage($request, __('default/actions.updated_success'), 'success');
                 return redirect(route('addresses.show', $address->id));
             } else {
-                Utils::flashMessage($request, __('default/actions.updated_danger'), 'danger');
-                return redirect(route('addresses.show', $address->id))->withInput();
+                flashMessage($request, __('default/actions.updated_danger'), 'danger');
+                return redirect(route('addresses.edit', $address->id))->withInput();
             }
 
         }

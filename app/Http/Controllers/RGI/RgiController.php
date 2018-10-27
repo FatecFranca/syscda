@@ -7,6 +7,7 @@ use App\RGI;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class RgiController extends Controller
 {
@@ -87,6 +88,7 @@ class RgiController extends Controller
         ], $message);
 
         $data = $request->all();
+        $data['user_id'] = Auth::id();
         $rgi = RGI::create($data);
 
         if ($rgi) {
@@ -145,8 +147,8 @@ class RgiController extends Controller
                 flashMessage($request, __('default/actions.updated_success'), 'success');
                 return redirect(route('rgi.show', $rgi->id));
             } else {
-                Utils::flashMessage($request, __('default/actions.updated_danger'), 'danger');
-                return redirect(route('rgi.show', $rgi->id))->withInput();
+                flashMessage($request, __('default/actions.updated_danger'), 'danger');
+                return redirect(route('rgi.edit', $rgi->id))->withInput();
             }
         }
 

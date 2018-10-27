@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./components/modal');
+require('jquery-mask-plugin');
 import 'select2';
 
 //lets sidebar

@@ -5,19 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RGI extends Model
+class Diocese extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'rgi';
+    protected $table = 'dioceses';
 
     protected $fillable = [
-        'rgi_number', 'number',
-        'address_id', 'user_id'
+        'address_id', 'name', 'opening_date',
+        'responsible', 'telephone', 'cnpj',
+        'email', 'user_id'
     ];
-
 
     public function address()
     {
