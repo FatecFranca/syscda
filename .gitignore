@@ -95,4 +95,6 @@ public/css/
 
 .editorconfig
 
+/.vagrant
+
 package-lock.json
