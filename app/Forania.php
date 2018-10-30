@@ -15,7 +15,7 @@ class Forania extends Model
 
     protected $fillable = [
         'name', 'opening_date',
-        'name', 'user_id', 'diocese_id'
+        'user_id', 'diocese_id'
     ];
 
     public function diocese()
