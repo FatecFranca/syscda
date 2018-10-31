@@ -102,12 +102,13 @@ class DioceseController extends Controller
             if (validar_cnpj($data['cnpj'])) {
 
                 $data['user_id'] = Auth::id();
-
                 $diocese = Diocese::create($data);
 
-                flashMessage($request, __('default/actions.created_success'), 'success');
+                if ($diocese) {
+                    flashMessage($request, __('default/actions.created_success'), 'success');
+                    return redirect(route('dioceses.show', $diocese->id));
+                }
 
-                return redirect(route('dioceses.show', $diocese->id));
             } else {
                 $addresses = Address::orderBy('id', 'desc')->get();
 

@@ -14,8 +14,18 @@ class Parish extends Model
     protected $table = 'parishes';
 
     protected $fillable = [
-        'forania_id','user_id', 'diocese_id',
+        'forania_id','user_id', 'address_id',
         'name', 'opening_date', 'responsible',
         'cnpj', 'email', 'telephone'
     ];
+
+    public function forania()
+    {
+        return $this->belongsTo('App\Forania');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo('App\Address');
+    }
 }

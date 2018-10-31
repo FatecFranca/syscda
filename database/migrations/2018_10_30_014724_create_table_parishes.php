@@ -27,7 +27,7 @@ class CreateTableParishes extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('address_id')->on('addresses')->references('id')
+            $table->foreign('forania_id')->on('foranias')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('address_id')->on('addresses')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');

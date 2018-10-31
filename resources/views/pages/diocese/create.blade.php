@@ -71,7 +71,7 @@
                 @endif
             </div>
             <div class="form-group col-md-9">
-                <label for="number">{{ __('addresses/views.address') }} *</label>
+                <label for="address_id">{{ __('addresses/views.address') }} *</label>
                 <select required class="custom-select" id="address_id" name="address_id"
                         value="{{ old('address_id', isset($diocese) ? $diocese['address_id'] : null) }}">
                     <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>
