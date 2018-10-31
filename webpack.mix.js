@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/pages/address.js', 'public/js')
+    .js('resources/js/pages/chapel.js', 'public/js')
     .js('resources/js/pages/diocese.js', 'public/js')
     .js('resources/js/pages/forania.js', 'public/js')
     .js('resources/js/pages/index.js', 'public/js')
@@ -21,6 +22,7 @@ mix.js('resources/js/app.js', 'public/js')
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/pages/address.scss', 'public/css')
+    .sass('resources/sass/pages/chapel.scss', 'public/css')
     .sass('resources/sass/pages/diocese.scss', 'public/css')
     .sass('resources/sass/pages/forania.scss', 'public/css')
     .sass('resources/sass/pages/index.scss', 'public/css')

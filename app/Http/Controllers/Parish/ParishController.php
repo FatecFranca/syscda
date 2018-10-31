@@ -147,7 +147,7 @@ class ParishController extends Controller
         }
 
         flashMessage($request, __('default/actions.created_error'), 'warning');
-        return redirect(route('parish.index'));
+        return redirect(route('parishes.index'));
     }
 
     public function edit($id, Request $request)
