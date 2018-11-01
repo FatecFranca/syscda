@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +20,6 @@ class Forania extends Model
 
     public function diocese()
     {
-        return $this->belongsTo('App\Diocese');
+        return $this->belongsTo('App\Models\Diocese');
     }
 }

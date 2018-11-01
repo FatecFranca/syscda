@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,11 +21,11 @@ class Chapel extends Model
 
     public function parish()
     {
-        return $this->belongsTo('App\Parish');
+        return $this->belongsTo('App\Models\Parish');
     }
 
     public function address()
     {
-        return $this->belongsTo('App\Address');
+        return $this->belongsTo('App\Models\Address');
     }
 }

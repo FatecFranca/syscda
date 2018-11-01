@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Forania;
 
-use App\Diocese;
-use App\Forania;
+use App\Models\Diocese;
+use App\Models\Forania;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

@@ -18,7 +18,7 @@
                 <tr>
                     <th scope="row">{{ $forania->id }}</th>
                     <td>{{ $forania->name }}</td>
-                    <td>{{ date_format(new DateTime($forania->opening_date), 'd/m/Y') }}</td>
+                    <td>{{ $forania->opening_date ? date_format(new DateTime($forania->opening_date), 'd/m/Y') : null }}</td>
                     <td>{{ $forania->diocese->name }}</td>
                     <td>
                         <a href="{{ route('foranias.show', ['id' => $forania->id]) }}" style="color: white"

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Diocese;
 
-use App\Address;
-use App\Diocese;
+use App\Models\Address;
+use App\Models\Diocese;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

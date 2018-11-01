@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Chapel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Chapel;
-use App\Address;
-use App\Parish;
+use App\Models\Chapel;
+use App\Models\Address;
+use App\Models\Parish;
 
 class ChapelController extends Controller
 {
@@ -41,7 +41,7 @@ class ChapelController extends Controller
 
             $addresses = Address::orderBy('id', 'desc')->get();
             $parishes = Parish::orderBy('id', 'desc')->get();
-    
+
             $returns = [
                 'chapel' => $chapel,
                 'addresses' => $addresses,
@@ -50,13 +50,13 @@ class ChapelController extends Controller
                 'css' => 'chapel',
                 'js' => 'chapel',
                 'action' => [
-                    'name' => __('default/actions.add')
+                    'name' => __('default/actions.edit')
                 ]
             ];
-    
-            return view('pages.chapel.create', $returns);   
+
+            return view('pages.chapel.show', $returns);
         }
-        
+
     }
 
     public function create()
@@ -146,5 +146,146 @@ class ChapelController extends Controller
 
         flashMessage($request, __('default/actions.created_error'), 'warning');
         return redirect(route('chapels.index'));
+    }
+
+    public function edit($id)
+    {
+        $chapel = Chapel::find($id);
+
+        if ($chapel) {
+
+            $addresses = Address::orderBy('id', 'desc')->get();
+            $parishes = Parish::orderBy('id', 'desc')->get();
+
+            $returns = [
+                'chapel' => $chapel,
+                'addresses' => $addresses,
+                'parishes' => $parishes,
+                'page_title' => __('chapels/views.data_chapel'),
+                'css' => 'chapel',
+                'js' => 'chapel',
+                'action' => [
+                    'name' => __('default/actions.save')
+                ]
+            ];
+
+            return view('pages.chapel.edit', $returns);
+        }
+    }
+
+
+    public function update($id, Request $request)
+    {
+        $message = [
+            'name.required' => "Nome é obrigatório.",
+            'responsible.required' => "Responsável é obrigatório.",
+            'telephone.required' => "Telefone é obrigatório.",
+            'email.unique' => 'E-mail já existente.',
+            'address_id.required' => 'Endereço é obrigatório.',
+            'parish_id.required' => 'Paróquia é obrigatório.'
+        ];
+
+        $this->validate($request, [
+            'name' => "required",
+            'responsible' => "required",
+            'telephone' => "required",
+            'email' => "unique:chapels,email," . $id,
+            'address_id' => 'required',
+            'parish_id' => 'required'
+        ], $message);
+
+        $data = $request->all();
+
+        $data['telephone'] = removeMaskTelephone($data['telephone']);
+
+        $data['cnpj'] = removeMaskCNPJ($data['cnpj']);
+
+        if ($data['cnpj']) {
+            if (validar_cnpj($data['cnpj'])) {
+
+                $data['user_id'] = Auth::id();
+                $chapel = Chapel::find($id);
+
+                if ($chapel) {
+                    $result = $chapel->fill($data)->save();
+                    if ($result) {
+                        flashMessage($request, __('default/actions.updated_success'), 'success');
+                        return redirect(route('chapels.show', $chapel->id));
+                    } else {
+                        flashMessage($request, __('default/actions.updated_danger'), 'danger');
+                        return redirect(route('chapels.edit', $chapel->id))->withInput();
+                    }
+                }
+
+                flashMessage($request, __('default/actions.not_found'), 'success');
+                return redirect(route('chapels.index'));
+
+            } else {
+
+                $addresses = Address::orderBy('id', 'desc')->get();
+                $parishes = Parish::orderBy('id', 'desc')->get();
+
+                $chapel = new Chapel();
+
+                $chapel->id = $id;
+                $chapel->name = $data['name'];
+                $chapel->opening_date = $data['opening_date'];
+                $chapel->responsible = $data['responsible'];
+                $chapel->telephone = $data['telephone'];
+                $chapel->cnpj = $data['cnpj'];
+                $chapel->email = $data['email'];
+
+                $returns = [
+                    'chapel' => $data,
+                    'addresses' => $addresses,
+                    'parishes' => $parishes,
+                    'page_title' => __('chapels/views.data_chapels'),
+                    'css' => 'chapel',
+                    'js' => 'chapel',
+                    'message' => 'CNPJ inválido',
+                    'action' => [
+                        'name' => __('default/actions.save')
+                    ]
+                ];
+
+                return view('pages.chapel.create', $returns);
+            }
+        } else {
+            $data['user_id'] = Auth::id();
+            $chapel = Chapel::find($id);
+
+            if ($chapel) {
+                $result = $chapel->fill($data)->save();
+
+                if ($result) {
+                    flashMessage($request, __('default/actions.updated_success'), 'success');
+                    return redirect(route('chapels.show', $chapel->id));
+                } else {
+                    flashMessage($request, __('default/actions.updated_danger'), 'danger');
+                    return redirect(route('chapels.edit', $chapel->id))->withInput();
+                }
+
+            } else {
+                flashMessage($request, __('default/actions.not_found'), 'success');
+                return redirect(route('chapels.index'));
+            }
+        }
+
+        flashMessage($request, __('default/actions.created_error'), 'warning');
+        return redirect(route('chapels.index'));
+    }
+
+    public function destroy($id)
+    {
+        $chapel = Chapel::find($id);
+        if ($chapel) {
+            $result = $chapel->delete();
+            if ($result) {
+                return response()->json(['url' => route('chapels.index')]);
+            } else {
+                throw new Exception(__('default/actions.deleted_error'));
+            }
+        }
+        throw new Exception(__('default/actions.not_found'));
     }
 }

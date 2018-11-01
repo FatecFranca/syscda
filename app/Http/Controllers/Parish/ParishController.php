@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Parish;
 
-use App\Address;
-use App\Forania;
-use App\Parish;
+use App\Models\Address;
+use App\Models\Forania;
+use App\Models\Parish;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -255,15 +255,28 @@ class ParishController extends Controller
             }
         } else {
             $data['user_id'] = Auth::id();
-            $parish = Parish::create($data);
+            $parish = Parish::find($id);
+
             if ($parish) {
-                flashMessage($request, __('default/actions.created_success'), 'success');
-                return redirect(route('parishes.show', $parish->id));
+                $result = $parish->fill($data)->save();
+
+                if ($result) {
+                    flashMessage($request, __('default/actions.updated_success'), 'success');
+                    return redirect(route('parishes.show', $parish->id));
+                } else {
+                    flashMessage($request, __('default/actions.updated_danger'), 'danger');
+                    return redirect(route('parishes.edit', $parish->id))->withInput();
+                }
+
+            } else {
+                flashMessage($request, __('default/actions.not_found'), 'success');
+                return redirect(route('parishes.index'));
             }
+
         }
 
         flashMessage($request, __('default/actions.created_error'), 'warning');
-        return redirect(route('parish.index'));
+        return redirect(route('parishes.index'));
     }
 
     public function destroy($id)

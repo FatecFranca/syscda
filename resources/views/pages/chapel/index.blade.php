@@ -21,7 +21,7 @@
                     <td>{{ $chapel->name }}</td>
                     <td>{{ $chapel->address->zipcode }}</td>
                     <td>{{ $chapel->parish->name }}</td>
-                    <td>{{ date_format(new DateTime($chapel->opening_date), 'd/m/Y') }}</td>
+                    <td>{{ $chapel->opening_date ? date_format(new DateTime($chapel->opening_date), 'd/m/Y') : null }}</td>
                     <td>
                         <a href="{{ route('chapels.show', ['id' => $chapel->id]) }}" style="color: white"
                            class="btn btn-secondary btn-sm">{{ __('default/actions.view') }}</a>

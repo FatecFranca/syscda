@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +21,6 @@ class RGI extends Model
 
     public function address()
     {
-        return $this->belongsTo('App\Address');
+        return $this->belongsTo('App\Models\Address');
     }
 }

@@ -18,7 +18,7 @@
                 <tr>
                     <th scope="row">{{ $diocese->id }}</th>
                     <td>{{ $diocese->name }}</td>
-                    <td>{{ date_format(new DateTime($diocese->opening_date), 'd/m/Y') }}</td>
+                    <td>{{ $diocese->opening_date ? date_format(new DateTime($diocese->opening_date), 'd/m/Y') : null }}</td>
                     <td>{{ $diocese->address->zipcode }}</td>
                     <td>
                         <a href="{{ route('dioceses.show', ['id' => $diocese->id]) }}" style="color: white"

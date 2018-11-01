@@ -21,7 +21,7 @@
                     <td>{{ $parish->name }}</td>
                     <td>{{ $parish->address->zipcode }}</td>
                     <td>{{ $parish->forania->name }}</td>
-                    <td>{{ date_format(new DateTime($parish->opening_date), 'd/m/Y') }}</td>
+                    <td>{{ $parish->opening_date ? date_format(new DateTime($parish->opening_date), 'd/m/Y') : null }}</td>
                     <td>
                         <a href="{{ route('parishes.show', ['id' => $parish->id]) }}" style="color: white"
                            class="btn btn-secondary btn-sm">{{ __('default/actions.view') }}</a>

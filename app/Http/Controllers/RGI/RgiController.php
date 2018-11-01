@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\RGI;
 
-use App\Address;
-use App\RGI;
+use App\Models\Address;
+use App\Models\RGI;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
