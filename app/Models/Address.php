@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +15,7 @@ class Address extends Model
 
     protected $fillable = [
         'street', 'neighborhood',
-        'complement',
+        'complement', 'user_id',
         'city', 'uf', 'zipcode'
     ];
 

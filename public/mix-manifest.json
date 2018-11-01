@@ -2,10 +2,18 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/address.css": "/css/address.css",
+    "/css/chapel.css": "/css/chapel.css",
+    "/css/diocese.css": "/css/diocese.css",
+    "/css/forania.css": "/css/forania.css",
     "/css/index.css": "/css/index.css",
     "/css/login.css": "/css/login.css",
+    "/css/parish.css": "/css/parish.css",
     "/css/rgi.css": "/css/rgi.css",
     "/js/rgi.js": "/js/rgi.js",
+    "/js/parish.js": "/js/parish.js",
     "/js/index.js": "/js/index.js",
+    "/js/forania.js": "/js/forania.js",
+    "/js/diocese.js": "/js/diocese.js",
+    "/js/chapel.js": "/js/chapel.js",
     "/js/address.js": "/js/address.js"
 }

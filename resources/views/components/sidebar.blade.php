@@ -6,6 +6,7 @@
         </div>
         <ul class="nav flex-column">
             @include('components.sidebar-items.addresses')
+            @include('components.sidebar-items.sacred')
         </ul>
     </div>
 </nav>

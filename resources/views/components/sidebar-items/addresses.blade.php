@@ -9,7 +9,7 @@
          ? 'show' : null }}">
             <a class="nav-link {{ Request::is('address*') ? 'active' : null }}"
                href="{{ route('addresses.index') }}">
-                <i class="fas fa-address-book"></i>&nbsp;&nbsp;{{ __('addresses/views.address') }}
+                <i class="fas fa-address-book"></i>&nbsp;&nbsp;{{ __('addresses/views.addresses') }}
             </a>
             <a class="nav-link  {{ Request::is('rgi*') ? 'active' : null }}"
                href="{{ route('rgi.index') }}">
