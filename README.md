@@ -43,15 +43,13 @@ Execute npm run dev.
 4. `cd /vagrant`
 5. `composer install && npm install`
 6. `php artisan key:generate`
-7. `sudo vim /etc/mongod.conf`
-8. Change `bind_id` from `127.0.0.1` to `0.0.0.0`
-9. `sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf`
-10. Change `bind-address` from `127.0.0.1` to `0.0.0.0`
-11. `mysql -u root -p`
-12. Type mysql password
-13. `grant all on *.* to 'root'@'%' identified by 'root';`
-14. `flush privileges;`
-15. `create database dodb;`
-16. `exit;`
-17. `sudo service mysql restart`
-18. `php artisan migrate && php artisan db:seed`
+7. `sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf`
+8. Change `bind-address` from `127.0.0.1` to `0.0.0.0`
+9. `mysql -u root -p`
+10. Type mysql password
+11. `grant all on *.* to 'root'@'%' identified by 'root';`
+12. `flush privileges;`
+13. `create database dodb;`
+14. `exit;`
+15. `sudo service mysql restart`
+16. `php artisan migrate && php artisan db:seed`
