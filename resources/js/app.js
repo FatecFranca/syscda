@@ -120,5 +120,5 @@ $(document).ready(function () {
     $('.custom-select').select2();
     $('#telephone').mask('(00) 0000-0000');
     $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
-
+    $('#cpf').mask('000.000.000-00', {reverse: true});
 });

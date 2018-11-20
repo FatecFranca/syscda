@@ -96,7 +96,7 @@ class RgiController extends Controller
             return redirect(route('rgi.show', $rgi->id));
         }
 
-        flashMessage($request, __('default/actions.not_found'), 'warning');
+        flashMessage($request, __('default/actions.created_error'), 'warning');
         return redirect(route('rgi.index'));
     }
 
@@ -109,7 +109,7 @@ class RgiController extends Controller
             $returns = [
                 'rgi' => $rgi,
                 'addresses' => $addresses,
-                'page_title' => __('rgi/views.rgi') . ' #' . $rgi->id,
+                'page_title' => __('default/actions.edit') . ' ' . __('rgi/views.rgi') . ' #' . $rgi->id,
                 'css' => 'rgi',
                 'js' => 'rgi',
                 'action' => [
