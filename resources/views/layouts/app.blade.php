@@ -42,5 +42,6 @@
         </div>
     </div>
     @include('components.modal')
+    @include('components.overlay')
 </body>
 </html>

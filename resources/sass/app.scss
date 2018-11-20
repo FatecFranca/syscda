@@ -3,6 +3,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./components/navbar";
 @import "./components/sidebar";
+@import "./components/overlay";
 @import '~select2/dist/css/select2.css';
 
 .navbar-laravel {
@@ -92,4 +93,10 @@
 
 .el-hide {
   display: none !important;
+}
+
+.nav {
+  &.nav-tabs {
+    margin-bottom: 0.5rem;
+  }
 }

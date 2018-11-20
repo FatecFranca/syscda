@@ -45,6 +45,34 @@ function validar_cnpj($cnpj)
     return $cnpj{13} == ($resto < 2 ? 0 : 11 - $resto);
 }
 
+function validar_cpf($cpf)
+{
+    //função usada do repo https://github.com/guisehn;
+    //https://gist.github.com/guisehn/3276015
+
+    $cpf = preg_replace('/[^0-9]/', '', (string) $cpf);
+
+    // Valida tamanho
+    if (strlen($cpf) != 11)
+        return false;
+
+    // Calcula e confere primeiro dígito verificador
+    for ($i = 0, $j = 10, $soma = 0; $i < 9; $i++, $j--)
+        $soma += $cpf{$i} * $j;
+    $resto = $soma % 11;
+
+    if ($cpf{9} != ($resto < 2 ? 0 : 11 - $resto))
+        return false;
+    // Calcula e confere segundo dígito verificador
+
+    for ($i = 0, $j = 11, $soma = 0; $i < 10; $i++, $j--)
+        $soma += $cpf{$i} * $j;
+    $resto = $soma % 11;
+
+    return $cpf{10} == ($resto < 2 ? 0 : 11 - $resto);
+}
+
+
 function removeMaskTelephone($telephone)
 {
     if ($telephone) {
@@ -73,4 +101,27 @@ function removeMaskCNPJ($cnpj)
     }
 
     return '';
+}
+
+function removeMaskCPF($cpf)
+{
+    if ($cpf) {
+
+        $cpf_not_mask = str_replace('.', '', $cpf);
+        $cpf_not_mask = str_replace('/', '', $cpf_not_mask);
+        $cpf_not_mask = str_replace('-', '', $cpf_not_mask);
+
+        return $cpf_not_mask;
+    }
+
+    return '';
+}
+
+function marital_status()
+{
+    return  [
+        'Solteiro',
+        'Casado',
+        'Divorciado'
+    ];
 }

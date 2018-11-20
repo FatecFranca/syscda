@@ -7,6 +7,8 @@
         <ul class="nav flex-column">
             @include('components.sidebar-items.addresses')
             @include('components.sidebar-items.sacred')
+            @include('components.sidebar-items.people')
+            @include('components.sidebar-items.types')
         </ul>
     </div>
 </nav>

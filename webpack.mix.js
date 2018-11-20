@@ -18,7 +18,9 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/pages/forania.js', 'public/js')
     .js('resources/js/pages/index.js', 'public/js')
     .js('resources/js/pages/parish.js', 'public/js')
+    .js('resources/js/pages/person.js', 'public/js')
     .js('resources/js/pages/rgi.js', 'public/js')
+    .js('resources/js/pages/type_people.js', 'public/js')
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/pages/address.scss', 'public/css')
@@ -28,5 +30,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/pages/index.scss', 'public/css')
     .sass('resources/sass/pages/login.scss', 'public/css')
     .sass('resources/sass/pages/parish.scss', 'public/css')
-    .sass('resources/sass/pages/rgi.scss', 'public/css');
+    .sass('resources/sass/pages/person.scss', 'public/css')
+    .sass('resources/sass/pages/rgi.scss', 'public/css')
+    .sass('resources/sass/pages/type_people.scss', 'public/css');
 
