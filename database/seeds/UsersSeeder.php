@@ -19,8 +19,18 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('admin')
         ];
 
+        $test = [
+            'name' => 'teste',
+            'email' => 'teste@teste.com',
+            'password' => bcrypt('123456789')
+        ];
+
         if(!User::where('email', 'admin@admin.com')->first()) {
             User::create($data);
+        }
+
+        if(!User::where('email', 'teste@teste.com')->first()) {
+            User::create($test);
         }
 
     }
