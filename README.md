@@ -57,6 +57,6 @@ Execute npm run dev.
 ## Como Contribuir
 
 Crie um branch e faça um pull request para o master, e aguarde a liberação do merge para o master.
-somente o usuário JuniorBM poderá aprovar os pull requests.
+somente o usuário [JuniorBM](JuniorBM) poderá aprovar os pull requests.
 
 Qualquer problema com o versionamento envie email para johnnyvaz@johnnyvaz.com.br
