@@ -14,7 +14,7 @@ class Chapel extends Model
     protected $table = 'chapels';
 
     protected $fillable = [
-        'parish_id','user_id', 'address_id',
+        'parish_id','user_id', 'rgi_id',
         'name', 'opening_date', 'responsible',
         'cnpj', 'email', 'telephone'
     ];

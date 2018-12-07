@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Chapel;
 
+use App\Models\RGI;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Chapel;
-use App\Models\Address;
 use App\Models\Parish;
 
 class ChapelController extends Controller
@@ -39,12 +39,12 @@ class ChapelController extends Controller
 
         if ($chapel) {
 
-            $addresses = Address::orderBy('id', 'desc')->get();
+            $rgis = RGI::orderBy('id', 'desc')->get();
             $parishes = Parish::orderBy('id', 'desc')->get();
 
             $returns = [
                 'chapel' => $chapel,
-                'addresses' => $addresses,
+                'rgis' => $rgis,
                 'parishes' => $parishes,
                 'page_title' => __('chapels/views.data_chapel'),
                 'css' => 'chapel',
@@ -61,11 +61,11 @@ class ChapelController extends Controller
 
     public function create()
     {
-        $addresses = Address::orderBy('id', 'desc')->get();
+        $rgis = RGI::orderBy('id', 'desc')->get();
         $parishes = Parish::orderBy('id', 'desc')->get();
 
         $returns = [
-            'addresses' => $addresses,
+            'rgis' => $rgis,
             'parishes' => $parishes,
             'page_title' => __('chapels/views.data_chapel'),
             'css' => 'chapel',
@@ -85,7 +85,7 @@ class ChapelController extends Controller
             'responsible.required' => "Responsável é obrigatório.",
             'telephone.required' => "Telefone é obrigatório.",
             'email.unique' => 'E-mail já existente.',
-            'address_id.required' => 'Endereço é obrigatório.',
+            'rgi_id.required' => 'RGI é obrigatório.',
             'parish_id.required' => 'Paróquia é obrigatório.'
         ];
 
@@ -94,7 +94,7 @@ class ChapelController extends Controller
             'responsible' => "required",
             'telephone' => "required",
             'email' => "unique:parishes",
-            'address_id' => 'required',
+            'rgi_id' => 'required',
             'parish_id' => 'required'
         ], $message);
 
@@ -117,12 +117,12 @@ class ChapelController extends Controller
 
             } else {
 
-                $addresses = Address::orderBy('id', 'desc')->get();
+                $rgis = RGI::orderBy('id', 'desc')->get();
                 $parishes = Parish::orderBy('id', 'desc')->get();
 
                 $returns = [
                     'chapel' => $data,
-                    'addresses' => $addresses,
+                    'rgis' => $rgis,
                     'parishes' => $parishes,
                     'page_title' => __('chapels/views.data_chapels'),
                     'css' => 'chapel',
@@ -154,12 +154,12 @@ class ChapelController extends Controller
 
         if ($chapel) {
 
-            $addresses = Address::orderBy('id', 'desc')->get();
+            $rgis = RGI::orderBy('id', 'desc')->get();
             $parishes = Parish::orderBy('id', 'desc')->get();
 
             $returns = [
                 'chapel' => $chapel,
-                'addresses' => $addresses,
+                'rgis' => $rgis,
                 'parishes' => $parishes,
                 'page_title' => __('chapels/views.data_chapel'),
                 'css' => 'chapel',
@@ -181,7 +181,7 @@ class ChapelController extends Controller
             'responsible.required' => "Responsável é obrigatório.",
             'telephone.required' => "Telefone é obrigatório.",
             'email.unique' => 'E-mail já existente.',
-            'address_id.required' => 'Endereço é obrigatório.',
+            'rgi_id.required' => 'RGI é obrigatório.',
             'parish_id.required' => 'Paróquia é obrigatório.'
         ];
 
@@ -190,7 +190,7 @@ class ChapelController extends Controller
             'responsible' => "required",
             'telephone' => "required",
             'email' => "unique:chapels,email," . $id,
-            'address_id' => 'required',
+            'rgi_id' => 'required',
             'parish_id' => 'required'
         ], $message);
 
@@ -222,7 +222,7 @@ class ChapelController extends Controller
 
             } else {
 
-                $addresses = Address::orderBy('id', 'desc')->get();
+                $rgis = RGI::orderBy('id', 'desc')->get();
                 $parishes = Parish::orderBy('id', 'desc')->get();
 
                 $chapel = new Chapel();
@@ -237,7 +237,7 @@ class ChapelController extends Controller
 
                 $returns = [
                     'chapel' => $data,
-                    'addresses' => $addresses,
+                    'rgis' => $rgis,
                     'parishes' => $parishes,
                     'page_title' => __('chapels/views.data_chapels'),
                     'css' => 'chapel',

@@ -72,19 +72,19 @@
                 @endif
             </div>
             <div class="form-group col-md-6">
-                <label for="address_id">{{ __('addresses/views.address') }} *</label>
-                <select required class="custom-select" id="address_id" name="address_id"
-                        value="{{ old('address_id', isset($chapel) ? $chapel['address_id'] : null) }}">
+                <label for="rgi_id">{{ __('rgi/views.rgi') }} *</label>
+                <select required class="custom-select" id="rgi_id" name="rgi_id"
+                        value="{{ old('rgi_id') }}">
                     <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>
-                    @foreach($addresses as $address)
-                        <option @if(isset($chapel) && $chapel['address_id'] == $address->id) selected="selected" @endif
-                        value="{{ $address->id }}">{{ $address->zipcode . ' - ' . $address->street . ' - ' . $address->neighborhood }}</option>
+                    @foreach($rgis as $rgi)
+                        <option @if(isset($chapel) && $chapel['rgi_id'] == $rgi->id) selected="selected" @endif
+                        value="{{ $rgi->id }}">{{ $rgi->rgi_number . ' - '  . $rgi->address->street . ' - ' . $rgi->number  }}</option>
                     @endforeach
 
                 </select>
-                @if(count($errors) && $errors->first('address_id'))
+                @if(count($errors) && $errors->first('rgi_id'))
                     <div class="badge badge-danger">
-                        {{ $errors->first('address_id') }}
+                        {{ $errors->first('rgi_id') }}
                     </div>
                 @endif
             </div>

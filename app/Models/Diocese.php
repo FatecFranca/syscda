@@ -14,7 +14,7 @@ class Diocese extends Model
     protected $table = 'dioceses';
 
     protected $fillable = [
-        'address_id', 'name', 'opening_date',
+        'rgi_id', 'name', 'opening_date',
         'responsible', 'telephone', 'cnpj',
         'email', 'user_id'
     ];
