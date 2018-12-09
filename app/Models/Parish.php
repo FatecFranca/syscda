@@ -24,8 +24,8 @@ class Parish extends Model
         return $this->belongsTo('App\Models\Forania');
     }
 
-    public function address()
+    public function rgi()
     {
-        return $this->belongsTo('App\Models\Address');
+        return $this->belongsTo('App\Models\RGI');
     }
 }

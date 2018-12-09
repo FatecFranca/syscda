@@ -21,6 +21,6 @@ class Diocese extends Model
 
     public function address()
     {
-        return $this->belongsTo('App\Models\Address');
+        return $this->belongsTo('App\Models\RGI');
     }
 }

@@ -38,14 +38,14 @@
             <input disabled type="email" class="form-control" id="email" name="email"
                    value="{{ old('email', isset($diocese) ? $diocese['email'] : null) }}">
         </div>
-        <div class="form-group col-md-9">
-            <label for="number">{{ __('addresses/views.address') }} *</label>
-            <select disabled required class="custom-select" id="address_id" name="address_id"
-                    value="{{ old('address_id', isset($diocese) ? $diocese['address_id'] : null) }}">
+        <div class="form-group col-md-6">
+            <label for="rgi_id">{{ __('rgi/views.rgi') }} * {{ old('rgi_id') }}</label>
+            <select disabled required class="custom-select" id="rgi_id" name="rgi_id"
+                    value="{{ old('rgi_id') }}">
                 <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>
-                @foreach($addresses as $address)
-                    <option @if(isset($diocese) && $diocese['address_id'] == $address->id) selected="selected" @endif
-                    value="{{ $address->id }}">{{ $address->zipcode . ' - ' . $address->street . ' - ' . $address->neighborhood }}</option>
+                @foreach($rgis as $rgi)
+                    <option @if(isset($diocese) && $diocese['rgi_id'] == $rgi->id) selected="selected" @endif
+                    value="{{ $rgi->id }}">{{ 'RGI: ' . $rgi->rgi_number . ' - '  . $rgi->address->street . ' - ' . 'Nº: ' . $rgi->number  }}</option>
                 @endforeach
 
             </select>

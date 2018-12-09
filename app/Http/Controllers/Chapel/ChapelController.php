@@ -64,7 +64,12 @@ class ChapelController extends Controller
         $rgis = RGI::orderBy('id', 'desc')->get();
         $parishes = Parish::orderBy('id', 'desc')->get();
 
+        if (session('chapel')) {
+            $chapel = session('chapel');
+        }
+
         $returns = [
+            'chapel' => isset($chapel) && $chapel ? $chapel : null,
             'rgis' => $rgis,
             'parishes' => $parishes,
             'page_title' => __('chapels/views.data_chapel'),
@@ -89,16 +94,28 @@ class ChapelController extends Controller
             'parish_id.required' => 'Paróquia é obrigatório.'
         ];
 
-        $this->validate($request, [
-            'name' => "required",
-            'responsible' => "required",
-            'telephone' => "required",
-            'email' => "unique:parishes",
-            'rgi_id' => 'required',
-            'parish_id' => 'required'
-        ], $message);
-
         $data = $request->all();
+
+        if ($data['email']) {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'email' => "unique:parishes",
+                'rgi_id' => 'required',
+                'parish_id' => 'required'
+            ], $message);
+
+        } else {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'rgi_id' => 'required',
+                'parish_id' => 'required'
+            ], $message);
+        }
+
 
         $data['telephone'] = removeMaskTelephone($data['telephone']);
 
@@ -117,23 +134,9 @@ class ChapelController extends Controller
 
             } else {
 
-                $rgis = RGI::orderBy('id', 'desc')->get();
-                $parishes = Parish::orderBy('id', 'desc')->get();
-
-                $returns = [
-                    'chapel' => $data,
-                    'rgis' => $rgis,
-                    'parishes' => $parishes,
-                    'page_title' => __('chapels/views.data_chapels'),
-                    'css' => 'chapel',
-                    'js' => 'chapel',
-                    'message' => 'CNPJ inválido',
-                    'action' => [
-                        'name' => __('default/actions.add')
-                    ]
-                ];
-
-                return view('pages.chapel.create', $returns);
+                return redirect('chapels/create')
+                    ->with('chapel', $data)
+                    ->with('message', 'CNPJ inválido');
             }
         } else {
             $data['user_id'] = Auth::id();
@@ -152,10 +155,15 @@ class ChapelController extends Controller
     {
         $chapel = Chapel::find($id);
 
+
         if ($chapel) {
 
             $rgis = RGI::orderBy('id', 'desc')->get();
             $parishes = Parish::orderBy('id', 'desc')->get();
+
+            if (session('cnpj')) {
+                $chapel->cnpj = session('cnpj');
+            }
 
             $returns = [
                 'chapel' => $chapel,
@@ -185,26 +193,37 @@ class ChapelController extends Controller
             'parish_id.required' => 'Paróquia é obrigatório.'
         ];
 
-        $this->validate($request, [
-            'name' => "required",
-            'responsible' => "required",
-            'telephone' => "required",
-            'email' => "unique:chapels,email," . $id,
-            'rgi_id' => 'required',
-            'parish_id' => 'required'
-        ], $message);
-
         $data = $request->all();
+
+        if ($data['email']) {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'email' => "unique:chapels,email," . $id,
+                'rgi_id' => 'required',
+                'parish_id' => 'required'
+            ], $message);
+        } else {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'rgi_id' => 'required',
+                'parish_id' => 'required'
+            ], $message);
+        }
+
 
         $data['telephone'] = removeMaskTelephone($data['telephone']);
 
         $data['cnpj'] = removeMaskCNPJ($data['cnpj']);
+        $chapel = Chapel::find($id);
 
         if ($data['cnpj']) {
             if (validar_cnpj($data['cnpj'])) {
 
                 $data['user_id'] = Auth::id();
-                $chapel = Chapel::find($id);
 
                 if ($chapel) {
                     $result = $chapel->fill($data)->save();
@@ -222,33 +241,9 @@ class ChapelController extends Controller
 
             } else {
 
-                $rgis = RGI::orderBy('id', 'desc')->get();
-                $parishes = Parish::orderBy('id', 'desc')->get();
-
-                $chapel = new Chapel();
-
-                $chapel->id = $id;
-                $chapel->name = $data['name'];
-                $chapel->opening_date = $data['opening_date'];
-                $chapel->responsible = $data['responsible'];
-                $chapel->telephone = $data['telephone'];
-                $chapel->cnpj = $data['cnpj'];
-                $chapel->email = $data['email'];
-
-                $returns = [
-                    'chapel' => $data,
-                    'rgis' => $rgis,
-                    'parishes' => $parishes,
-                    'page_title' => __('chapels/views.data_chapels'),
-                    'css' => 'chapel',
-                    'js' => 'chapel',
-                    'message' => 'CNPJ inválido',
-                    'action' => [
-                        'name' => __('default/actions.save')
-                    ]
-                ];
-
-                return view('pages.chapel.create', $returns);
+                return redirect()->route('chapels.edit', ['id' => $chapel->id])
+                    ->with('cnpj', $data['cnpj'])
+                    ->with('message', 'CNPJ inválido');
             }
         } else {
             $data['user_id'] = Auth::id();

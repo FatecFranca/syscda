@@ -9,7 +9,7 @@
                 <th scope="col">{{ __('default/views.id') }}</th>
                 <th scope="col">{{ __('default/views.name') }}</th>
                 <th scope="col">{{ __('validation.attributes.opening_date') }}</th>
-                <th scope="col">{{ __('validation.attributes.zipcode') }}</th>
+                {{--<th scope="col">{{ __('validation.attributes.zipcode') }}</th>--}}
                 <th scope="col">{{ __('default/views.actions') }}</th>
             </tr>
             </thead>
@@ -19,7 +19,7 @@
                     <th scope="row">{{ $diocese->id }}</th>
                     <td>{{ $diocese->name }}</td>
                     <td>{{ $diocese->opening_date ? date_format(new DateTime($diocese->opening_date), 'd/m/Y') : null }}</td>
-                    <td>{{ $diocese->address->zipcode }}</td>
+{{--                    <td>{{ $diocese->address->zipcode }}</td>--}}
                     <td>
                         <a href="{{ route('dioceses.show', ['id' => $diocese->id]) }}" style="color: white"
                            class="btn btn-secondary btn-sm">{{ __('default/actions.view') }}</a>

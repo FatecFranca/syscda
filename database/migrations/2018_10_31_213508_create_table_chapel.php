@@ -29,7 +29,7 @@ class CreateTableChapel extends Migration
 
             $table->foreign('parish_id')->on('parishes')->references('id')
             ->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('rgi_id')->on('rgis')->references('id')
+            $table->foreign('rgi_id')->on('rgi')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('user_id')->on('users')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');

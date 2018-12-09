@@ -40,7 +40,7 @@
                     <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>
                     @foreach($rgis as $rgi)
                         <option @if(isset($chapel) && $chapel['rgi_id'] == $rgi->id) selected="selected" @endif
-                        value="{{ $rgi->id }}">{{ $rgi->rgi_number . ' - '  . $rgi->address->street . ' - ' . $rgi->number  }}</option>
+                        value="{{ $rgi->id }}">{{ 'RGI: ' . $rgi->rgi_number . ' - '  . $rgi->address->street . ' - ' . 'Nº: ' . $rgi->number  }}</option>
                     @endforeach
 
                 </select>
@@ -51,7 +51,7 @@
                         value="{{ old('parish_id', isset($chapel) ? $chapel['parish_id'] : null) }}">
                     <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>
                     @foreach($parishes as $parish)
-                        <option @if(isset($chapel) && $chapel['forania_id'] == $parish->id) selected="selected" @endif
+                        <option @if(isset($chapel) && $chapel['parish_id'] == $parish->id) selected="selected" @endif
                         value="{{ $parish->id }}">{{ $parish->name }}</option>
                     @endforeach
 

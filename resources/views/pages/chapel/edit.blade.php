@@ -45,9 +45,9 @@
                         {{ $errors->first('cnpj') }}
                     </div>
                 @endif
-                @if(isset($message) && $message)
+                @if(session('message'))
                     <div class="badge badge-danger">
-                        {{ $message }}
+                        {{ session('message') }}
                     </div>
                 @endif
             </div>
@@ -78,7 +78,7 @@
                     <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>
                     @foreach($rgis as $rgi)
                         <option @if(isset($chapel) && $chapel['rgi_id'] == $rgi->id) selected="selected" @endif
-                        value="{{ $rgi->id }}">{{ $rgi->rgi_number . ' - '  . $rgi->address->street . ' - ' . $rgi->number  }}</option>
+                        value="{{ $rgi->id }}">{{ 'RGI: ' . $rgi->rgi_number . ' - '  . $rgi->address->street . ' - ' . 'Nº: ' . $rgi->number  }}</option>
                     @endforeach
 
                 </select>
