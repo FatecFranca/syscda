@@ -8,7 +8,7 @@
             <tr>
                 <th scope="col">{{ __('default/views.id') }}</th>
                 <th scope="col">{{ __('default/views.name') }}</th>
-                <th scope="col">{{ __('validation.attributes.zipcode') }}</th>
+{{--                <th scope="col">{{ __('validation.attributes.zipcode') }}</th>--}}
                 <th scope="col">{{ __('parishes/views.parish') }}</th>
                 <th scope="col">{{ __('validation.attributes.opening_date') }}</th>
                 <th scope="col">{{ __('default/views.actions') }}</th>
@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="row">{{ $chapel->id }}</th>
                     <td>{{ $chapel->name }}</td>
-                    <td>{{ $chapel->address->zipcode }}</td>
+                    {{--<td>{{ $chapel->address->zipcode }}</td>--}}
                     <td>{{ $chapel->parish->name }}</td>
                     <td>{{ $chapel->opening_date ? date_format(new DateTime($chapel->opening_date), 'd/m/Y') : null }}</td>
                     <td>

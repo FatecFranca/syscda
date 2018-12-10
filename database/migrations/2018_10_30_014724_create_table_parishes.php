@@ -16,7 +16,7 @@ class CreateTableParishes extends Migration
         Schema::create('parishes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('forania_id')->unsigned();
-            $table->integer('address_id')->unsigned();
+            $table->integer('rgi_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->date('opening_date')->nullable();
@@ -29,7 +29,7 @@ class CreateTableParishes extends Migration
 
             $table->foreign('forania_id')->on('foranias')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('address_id')->on('addresses')->references('id')
+            $table->foreign('rgi_id')->on('rgi')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('user_id')->on('users')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
