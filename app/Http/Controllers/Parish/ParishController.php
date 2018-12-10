@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Parish;
 use App\Models\Address;
 use App\Models\Forania;
 use App\Models\Parish;
+use App\Models\RGI;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,12 +39,12 @@ class ParishController extends Controller
         $parish = Parish::find($id);
 
         if ($parish) {
-            $addresses = Address::orderBy('id', 'desc')->get();
+            $rgis = RGI::orderBy('id', 'desc')->get();
             $foranias = Forania::orderBy('id', 'desc')->get();
 
             $returns = [
                 'parish' => $parish,
-                'addresses' => $addresses,
+                'rgis' => $rgis,
                 'foranias' => $foranias,
                 'page_title' => __('parishes/views.parish') . ' #' . $parish->id,
                 'css' => 'parish',
@@ -63,11 +64,16 @@ class ParishController extends Controller
 
     public function create()
     {
-        $addresses = Address::orderBy('id', 'desc')->get();
+        $rgis = RGI::orderBy('id', 'desc')->get();
         $foranias = Forania::orderBy('id', 'desc')->get();
 
+        if (session('parish')) {
+            $parish = session('parish');
+        }
+
         $returns = [
-            'addresses' => $addresses,
+            'parish' => isset($parish) && $parish ? $parish : null,
+            'rgis' => $rgis,
             'foranias' => $foranias,
             'page_title' => __('parishes/views.data_parish'),
             'css' => 'parish',
@@ -87,20 +93,33 @@ class ParishController extends Controller
             'responsible.required' => "Responsável é obrigatório.",
             'telephone.required' => "Telefone é obrigatório.",
             'email.unique' => 'E-mail já existente.',
-            'address_id.required' => 'Endereço é obrigatório.',
+            'rgi_id.required' => 'Endereço é obrigatório.',
             'forania_id.required' => 'Forania é obrigatório.'
         ];
 
-        $this->validate($request, [
-            'name' => "required",
-            'responsible' => "required",
-            'telephone' => "required",
-            'email' => "unique:parishes",
-            'address_id' => 'required',
-            'forania_id' => 'required'
-        ], $message);
-
         $data = $request->all();
+
+        if ($data['email']) {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'email' => "unique:parishes",
+                'rgi_id' => 'required',
+                'forania_id' => 'required'
+            ], $message);
+
+        } else {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'rgi_id' => 'required',
+                'forania_id' => 'required'
+            ], $message);
+
+        }
+
 
         $data['telephone'] = removeMaskTelephone($data['telephone']);
 
@@ -119,23 +138,9 @@ class ParishController extends Controller
 
             } else {
 
-                $addresses = Address::orderBy('id', 'desc')->get();
-                $foranias = Forania::orderBy('id', 'desc')->get();
-
-                $returns = [
-                    'parish' => $data,
-                    'addresses' => $addresses,
-                    'foranias' => $foranias,
-                    'page_title' => __('parishes/views.data_parish'),
-                    'css' => 'parish',
-                    'js' => 'parish',
-                    'message' => 'CNPJ inválido',
-                    'action' => [
-                        'name' => __('default/actions.add')
-                    ]
-                ];
-
-                return view('pages.parish.create', $returns);
+                return redirect('parishes/create')
+                    ->with('parish', $data)
+                    ->with('message', 'CNPJ inválido');
             }
         } else {
             $data['user_id'] = Auth::id();
@@ -155,12 +160,16 @@ class ParishController extends Controller
         $parish = Parish::find($id);
 
         if ($parish) {
-            $addresses = Address::orderBy('id', 'desc')->get();
+            $rgis = RGI::orderBy('id', 'desc')->get();
             $foranias = Forania::orderBy('id', 'desc')->get();
+
+            if (session('cnpj')) {
+                $parish->cnpj = session('cnpj');
+            }
 
             $returns = [
                 'parish' => $parish,
-                'addresses' => $addresses,
+                'rgis' => $rgis,
                 'foranias' => $foranias,
                 'page_title' => __('default/actions.edit') . ' ' . __('parishes/views.parish') . ' #' . $parish->id,
                 'css' => 'parish',
@@ -184,30 +193,41 @@ class ParishController extends Controller
             'responsible.required' => "Responsável é obrigatório.",
             'telephone.required' => "Telefone é obrigatório.",
             'email.unique' => 'E-mail já existente.',
-            'address_id.required' => 'Endereço é obrigatório.',
+            'rgi_id.required' => 'Endereço é obrigatório.',
             'forania_id.required' => 'Forania é obrigatório.'
         ];
 
-        $this->validate($request, [
-            'name' => "required",
-            'responsible' => "required",
-            'telephone' => "required",
-            'email' => "unique:parishes,email," . $id,
-            'address_id' => 'required',
-            'forania_id' => 'required'
-        ], $message);
-
         $data = $request->all();
+
+        if ($data['email']) {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'email' => "unique:parishes,email," . $id,
+                'rgi_id' => 'required',
+                'forania_id' => 'required'
+            ], $message);
+        } else {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'rgi_id' => 'required',
+                'forania_id' => 'required'
+            ], $message);
+        }
+
 
         $data['telephone'] = removeMaskTelephone($data['telephone']);
 
         $data['cnpj'] = removeMaskCNPJ($data['cnpj']);
 
+        $parish = Parish::find($id);
         if ($data['cnpj']) {
             if (validar_cnpj($data['cnpj'])) {
 
                 $data['user_id'] = Auth::id();
-                $parish = Parish::find($id);
 
                 if ($parish) {
                     $result = $parish->fill($data)->save();
@@ -225,33 +245,9 @@ class ParishController extends Controller
 
             } else {
 
-                $addresses = Address::orderBy('id', 'desc')->get();
-                $foranias = Forania::orderBy('id', 'desc')->get();
-
-                $parish = new Parish();
-
-                $parish->id = $id;
-                $parish->name = $data['name'];
-                $parish->opening_date = $data['opening_date'];
-                $parish->responsible = $data['responsible'];
-                $parish->telephone = $data['telephone'];
-                $parish->cnpj = $data['cnpj'];
-                $parish->email = $data['email'];
-
-                $returns = [
-                    'parish' => $data,
-                    'addresses' => $addresses,
-                    'foranias' => $foranias,
-                    'page_title' => __('parishes/views.data_parish'),
-                    'css' => 'parish',
-                    'js' => 'parish',
-                    'message' => 'CNPJ inválido',
-                    'action' => [
-                        'name' => __('default/actions.add')
-                    ]
-                ];
-
-                return view('pages.parish.create', $returns);
+                return redirect()->route('parishes.edit', ['id' => $parish->id])
+                    ->with('cpf', $data['cnpj'])
+                    ->with('message', 'CNPJ inválido');
             }
         } else {
             $data['user_id'] = Auth::id();

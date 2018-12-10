@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Diocese;
 
 use App\Models\Address;
 use App\Models\Diocese;
+use App\Models\RGI;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,12 +37,12 @@ class DioceseController extends Controller
     public function show($id, Request $request)
     {
         $diocese = Diocese::find($id);
-        $addresses = Address::orderBy('id', 'desc')->get();
+        $rgis = RGI::orderBy('id', 'desc')->get();
 
         if ($diocese) {
             $returns = [
                 'diocese' => $diocese,
-                'addresses' => $addresses,
+                'rgis' => $rgis,
                 'page_title' => __('dioceses/views.diocese') . ' #' . $diocese->id,
                 'css' => 'diocese',
                 'js' => 'diocese',
@@ -58,10 +59,15 @@ class DioceseController extends Controller
 
     public function create()
     {
-        $addresses = Address::orderBy('id', 'desc')->get();
+        $rgis = RGI::orderBy('id', 'desc')->get();
+
+        if (session('diocese')) {
+            $diocese = session('diocese');
+        }
 
         $returns = [
-            'addresses' => $addresses,
+            'diocese' => isset($diocese) && $diocese ? $diocese : null,
+            'rgis' => $rgis,
             'page_title' => __('default/actions.create') . ' ' . __('dioceses/views.diocese'),
             'css' => 'diocese',
             'js' => 'diocese',
@@ -81,18 +87,30 @@ class DioceseController extends Controller
             'responsible.required' => "Responsável é obrigatório.",
             'telephone.required' => "Telefone é obrigatório.",
             'email.unique' => 'E-mail já existente.',
-            'address_id.required' => 'Endereço é obrigatório.'
+            'rgi_id.required' => 'RGI é obrigatório.'
         ];
 
-        $this->validate($request, [
-            'name' => "required",
-            'responsible' => "required",
-            'telephone' => "required",
-            'email' => "unique:dioceses",
-            'address_id' => 'required'
-        ], $message);
-
         $data = $request->all();
+
+        if ($data['email']) {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'email' => "unique:dioceses",
+                'rgi_id' => 'required'
+            ], $message);
+        } else {
+            $this->validate($request, [
+                'name' => "required",
+                'responsible' => "required",
+                'telephone' => "required",
+                'rgi_id' => 'required'
+            ], $message);
+        }
+
+
+
 
         $data['telephone'] = removeMaskTelephone($data['telephone']);
 
@@ -110,21 +128,9 @@ class DioceseController extends Controller
                 }
 
             } else {
-                $addresses = Address::orderBy('id', 'desc')->get();
-
-                $returns = [
-                    'diocese' => $data,
-                    'addresses' => $addresses,
-                    'page_title' => __('dioceses/views.dioceses'),
-                    'css' => 'diocese',
-                    'js' => 'diocese',
-                    'message' => 'CNPJ inválido',
-                    'action' => [
-                        'name' => __('default/actions.add')
-                    ]
-                ];
-
-                return view('pages.diocese.create', $returns);
+                return redirect('dioceses/create')
+                    ->with('diocese', $data)
+                    ->with('message', 'CNPJ inválido');
             }
         } else {
             $data['user_id'] = Auth::id();
@@ -143,12 +149,16 @@ class DioceseController extends Controller
     public function edit($id, Request $request)
     {
         $diocese = Diocese::find($id);
-        $addresses = Address::orderBy('id', 'desc')->get();
+        $rgis = RGI::orderBy('id', 'desc')->get();
+
+        if (session('cnpj')) {
+            $diocese->cnpj = session('cnpj');
+        }
 
         if ($diocese) {
             $returns = [
                 'diocese' => $diocese,
-                'addresses' => $addresses,
+                'rgis' => $rgis,
                 'page_title' => __('default/actions.edit') . ' ' . __('dioceses/views.diocese') . ' #' . $diocese->id,
                 'css' => 'diocese',
                 'js' => 'diocese',
@@ -170,7 +180,7 @@ class DioceseController extends Controller
             'responsible.required' => "Responsável é obrigatório.",
             'telephone.required' => "Telefone é obrigatório.",
             'email.unique' => 'E-mail já existente.',
-            'address_id.required' => 'Endereço é obrigatório.'
+            'rgi_id.required' => 'Endereço é obrigatório.'
         ];
 
         $this->validate($request, [
@@ -178,7 +188,7 @@ class DioceseController extends Controller
             'responsible' => "required",
             'telephone' => "required",
             'email' => "unique:dioceses,email," . $id,
-            'address_id' => 'required'
+            'rgi_id' => 'required'
         ], $message);
 
         $data = $request->all();
@@ -208,31 +218,10 @@ class DioceseController extends Controller
 
                 return redirect(route('dioceses.index'));
             } else {
-                $addresses = Address::orderBy('id', 'desc')->get();
 
-                $diocese = new Diocese();
-
-                $diocese->id = $id;
-                $diocese->name = $data['name'];
-                $diocese->opening_date = $data['opening_date'];
-                $diocese->responsible = $data['responsible'];
-                $diocese->telephone = $data['telephone'];
-                $diocese->cnpj = $data['cnpj'];
-                $diocese->email = $data['email'];
-
-                $returns = [
-                    'diocese' => $diocese,
-                    'addresses' => $addresses,
-                    'page_title' => __('dioceses/views.diocese') . ' #' . $diocese->id,
-                    'css' => 'diocese',
-                    'js' => 'diocese',
-                    'message' => 'CNPJ inválido',
-                    'action' => [
-                        'name' => __('default/actions.save')
-                    ]
-                ];
-
-                return view('pages.diocese.edit', $returns);
+                return redirect()->route('dioceses.edit', ['id' => $diocese->id])
+                    ->with('cpf', $data['cnpj'])
+                    ->with('message', 'CNPJ inválido');
             }
 
         } else {

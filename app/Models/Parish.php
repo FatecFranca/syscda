@@ -14,7 +14,7 @@ class Parish extends Model
     protected $table = 'parishes';
 
     protected $fillable = [
-        'forania_id','user_id', 'address_id',
+        'forania_id','user_id', 'rgi_id',
         'name', 'opening_date', 'responsible',
         'cnpj', 'email', 'telephone'
     ];
@@ -24,8 +24,8 @@ class Parish extends Model
         return $this->belongsTo('App\Models\Forania');
     }
 
-    public function address()
+    public function rgi()
     {
-        return $this->belongsTo('App\Models\Address');
+        return $this->belongsTo('App\Models\RGI');
     }
 }

@@ -16,7 +16,7 @@ class CreateTableChapel extends Migration
         Schema::create('chapels', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parish_id')->unsigned();
-            $table->integer('address_id')->unsigned();
+            $table->integer('rgi_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->date('opening_date')->nullable();
@@ -29,7 +29,7 @@ class CreateTableChapel extends Migration
 
             $table->foreign('parish_id')->on('parishes')->references('id')
             ->onDelete('restrict')->onUpdate('restrict');
-            $table->foreign('address_id')->on('addresses')->references('id')
+            $table->foreign('rgi_id')->on('rgi')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('user_id')->on('users')->references('id')
                 ->onDelete('restrict')->onUpdate('restrict');
