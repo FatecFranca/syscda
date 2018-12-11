@@ -60,3 +60,6 @@ Crie um branch e faça um pull request para o master, e aguarde a liberação do
 somente o usuário [JuniorBM](https://github.com/juniorBM) poderá aprovar os pull requests.
 
 Qualquer problema com o versionamento envie email para johnnyvaz@johnnyvaz.com.br
+
+## Ambiente para teste
+...
