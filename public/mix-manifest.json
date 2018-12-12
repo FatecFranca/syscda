@@ -4,6 +4,7 @@
     "/css/address.css": "/css/address.css",
     "/css/chapel.css": "/css/chapel.css",
     "/css/diocese.css": "/css/diocese.css",
+    "/css/family_setting.css": "/css/family_setting.css",
     "/css/forania.css": "/css/forania.css",
     "/css/index.css": "/css/index.css",
     "/css/login.css": "/css/login.css",
@@ -17,6 +18,7 @@
     "/js/parish.js": "/js/parish.js",
     "/js/index.js": "/js/index.js",
     "/js/forania.js": "/js/forania.js",
+    "/js/family_setting.js": "/js/family_setting.js",
     "/js/diocese.js": "/js/diocese.js",
     "/js/chapel.js": "/js/chapel.js",
     "/js/address.js": "/js/address.js"
