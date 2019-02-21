@@ -71,7 +71,7 @@
                 @endif
             </div>
             <div class="form-group col-md-6">
-                <label for="rgi_id">{{ __('rgi/views.rgi') }} * {{ old('rgi_id') }}</label>
+                <label for="rgi_id">{{ __('rgi/views.rgi') }} * }}</label>
                 <select required class="custom-select" id="rgi_id" name="rgi_id"
                         value="{{ old('rgi_id') }}">
                     <option selected disabled value="0">{{ __('default/views.selectOption') }}</option>

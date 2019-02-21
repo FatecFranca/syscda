@@ -19,10 +19,11 @@ class CreateTableFamilySettings extends Migration
             $table->integer('rgi_id')->unsigned();
             $table->string('type_housing', 200);
             $table->decimal('rent_value', 12, 2)->nullable();
-            $table->boolean('family_bag');
+            $table->boolean('family_bag')->default(false);
             $table->decimal('value_bag', 12, 2)->nullable();
-            $table->boolean('inss_benefit');
+            $table->boolean('inss_benefit')->default(false);;
             $table->decimal('value_inss_benefit', 12, 2)->nullable();
+            $table->boolean('pension')->default(false);
             $table->decimal('pension_amount', 12, 2)->nullable();
             $table->decimal('drug_spending', 12, 2)->nullable();
             $table->timestamps();

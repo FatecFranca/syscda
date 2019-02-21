@@ -17,7 +17,8 @@
                 <tr>
                     <th scope="row">{{ $family_setting->id }}</th>
                     <td>{{ $family_setting->type_housing }}</td>
-                    <td>{{ 'RGI: ' . $family_setting->rgi . $family_setting->rgi->address->street . 'Nº: ' . $family_setting->rgi->number }}</td>
+                    <td>{{ 'RGI: ' . $family_setting->rgi->rgi_number . ' ' . $family_setting->rgi->address->street .
+                    ' ' . 'Nº: ' . $family_setting->rgi->number }}</td>
                     <td>
                         <a href="{{ route('family_settings.show', ['id' => $family_setting->id]) }}" style="color: white"
                            class="btn btn-secondary btn-sm">{{ __('default/actions.view') }}</a>

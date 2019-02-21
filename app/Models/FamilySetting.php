@@ -16,7 +16,12 @@ class FamilySetting extends Model
     protected $fillable = [
         'user_id', 'rgi_id', 'type_housing',
         'rent_value', 'family_bag', 'value_bag',
-        'inss_benefit', 'value_inss_benefit', 'pension_amount',
-        'drug_spending'
+        'inss_benefit', 'value_inss_benefit', 'pension',
+        'pension_amount', 'drug_spending'
     ];
+
+    public function rgi()
+    {
+        return $this->belongsTo('App\Models\RGI');
+    }
 }
