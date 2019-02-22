@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    <ul class="nav nav-tabs" id="tabFamily" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="person-tab" data-toggle="tab"
+               href="#person" role="tab" aria-controls="person"
+               aria-selected="true">{{ __('people/views.data_person') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="type_person-tab" data-toggle="tab"
+               href="#type_person_tab" role="tab" aria-controls="type_person"
+               aria-selected="false">{{ __('types/people/views.type_people') }}</a>
+        </li>
+    </ul>
     <form class="form" method="POST" action="{{ route('family_settings.update', ['id' => $family_setting->id]) }}">
         @method('PUT')
         @csrf
